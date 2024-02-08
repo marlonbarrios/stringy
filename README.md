@@ -1,4 +1,4 @@
-# Stringy
+# Soft Body Character and Human Body tracking
 
 
 https://github.com/marlonbarrios/stringy/assets/90220317/636b6eb4-b6a6-41dd-b9df-f8800d5b4703
@@ -42,4 +42,7 @@ The code consists of several functions:
 - `windowResized()`: Handles window resizing and adjusts camera dimensions accordingly.
 
 - ![Screenshot 2024-02-08 at 1 28 10 AM](https://github.com/marlonbarrios/stringy/assets/90220317/30b7eba8-033b-460a-8fca-dfd113a96f36)
+
+- Inspored and hacked from the amazing [Coding Train](https://thecodingtrain.com/challenges/177-soft-body-character)
+- 
 
