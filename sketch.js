@@ -26,31 +26,37 @@ function keyPressed() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
+captureWebcam();
+let bounds = new Rect(0, 0, width , height);
   // Initializing the physics engine and setting world bounds
   physics = new VerletPhysics2D();
-  physics.setWorldBounds(new Rect(0, 0, width, height * 2));
+  physics.setWorldBounds(bounds);
 
-  // Creating particles and eyes
-  // Particles arranged in a grid pattern
-  for (let x = 200; x <= 400; x += 50) {
-    for (let y = 100; y <= 300; y += 100) {
-      particles.push(new Particle(x, y));
-    }
-  }
 
-  // Eyes positioned among the particles
+  particles.push(new Particle(200, 100));
+  particles.push(new Particle(250, 100));
+  particles.push(new Particle(300, 100));
+  particles.push(new Particle(350, 100));
+  particles.push(new Particle(400, 100));
+  particles.push(new Particle(350, 200));
+  particles.push(new Particle(400, 300));
+  particles.push(new Particle(350, 300));
+  particles.push(new Particle(300, 300));
+  particles.push(new Particle(250, 300));
+  particles.push(new Particle(200, 300));
+  particles.push(new Particle(250, 200));
+
   eyes.push(new Particle(275, 150));
   eyes.push(new Particle(325, 150));
   eyes.push(new Particle(250, 50));
   eyes.push(new Particle(350, 50));
 
-  // Creating springs between particles and between particles and eyes
   for (let i = 0; i < particles.length; i++) {
     for (let j = i + 1; j < particles.length; j++) {
       if (i !== j) {
         let a = particles[i];
         let b = particles[j];
+        // let b = particles[(i + 1) % particles.length];
         springs.push(new Spring(a, b, 0.001));
       }
     }
@@ -61,12 +67,82 @@ function setup() {
     springs.push(new Spring(particle, eyes[1], 0.01));
   }
 
+  springs.push(new Spring(eyes[2], particles[1], 0.01));
+  springs.push(new Spring(eyes[3], particles[3], 0.01));
+
+  springs.push(new Spring(eyes[2], particles[3], 0.01));
+  springs.push(new Spring(eyes[3], particles[1], 0.01));
+
+  springs.push(new Spring(eyes[2], particles[0], 0.01));
+  springs.push(new Spring(eyes[3], particles[4], 0.01));
+
+  springs.push(new Spring(eyes[3], particles[2], 0.01));
+  springs.push(new Spring(eyes[2], particles[2], 0.01));
+
+  springs.push(new Spring(eyes[2], eyes[3], 0.01));
+
   springs.push(new Spring(eyes[0], eyes[3], 0.01));
   springs.push(new Spring(eyes[0], eyes[2], 0.01));
   springs.push(new Spring(eyes[1], eyes[2], 0.01));
   springs.push(new Spring(eyes[1], eyes[3], 0.01));
+}
 
-  // Setting up canvas, webcam, and angle mode
+function draw() {
+ 
+
+  physics.update();
+
+  stroke(112, 50, 126);
+  if (showSprings) stroke(112, 50, 126, 100);
+
+  strokeWeight(4);
+  line(particles[1].x, particles[1].y, eyes[2].x, eyes[2].y);
+  line(particles[3].x, particles[3].y, eyes[3].x, eyes[3].y);
+  strokeWeight(16);
+  point(eyes[2].x, eyes[2].y);
+  point(eyes[3].x, eyes[3].y);
+
+  fill(45, 197, 244);
+  if (showSprings) fill(45, 197, 244, 100);
+  strokeWeight(2);
+  beginShape();
+  for (let particle of particles) {
+    vertex(particle.x, particle.y);
+  }
+  endShape(CLOSE);
+
+  //   fill(127, 127);
+  //   stroke(0);
+  //   strokeWeight(2);
+  //   beginShape();
+  //   for (let particle of particles) {
+  //     vertex(particle.x, particle.y);
+  //   }
+  //   endShape(CLOSE);
+
+  // for (let particle of particles) {
+  //   particle.show();
+  // }
+
+  eyes[0].show();
+  eyes[1].show();
+
+  // for (let eye of eyes) {
+  //   eye.show();
+  // }
+
+  if (showSprings) {
+    for (let spring of springs) {
+      spring.show();
+    }
+  }
+
+  if (mouseIsPressed) {
+    particles[0].lock();
+    particles[0].x = mouseX;
+    particles[0].y = mouseY;
+    particles[0].unlock();
+  }
   createCanvas(windowWidth, windowHeight);
   captureWebcam();
   angleMode(DEGREES);
@@ -88,7 +164,17 @@ function draw() {
     let indexY = map(mediaPipe.landmarks[0][8].y, 0, 1, 0, capture.scaledHeight);
     let thumbX = map(mediaPipe.landmarks[0][4].x, 1, 0, 0, capture.scaledWidth);
     let thumbY = map(mediaPipe.landmarks[0][4].y, 0, 1, 0, capture.scaledHeight);
-    
+    particles.forEach(particle => {
+      let d = dist(particle.x, particle.y, indexX, indexY);
+      let repulsionThreshold = 100;  // Distance within which the repulsion effect occurs
+      if (d < repulsionThreshold) {
+        let repelForce = 100; // Strength of repulsion, adjust as needed
+        let angle = atan2(particle.y - indexY, particle.x - indexX);
+        particle.x += cos(angle) * repelForce;
+        particle.y += sin(angle) * repelForce;
+      }
+    }
+  );
     // Locking particle to thumb position if thumb and index fingers are close
     if (dist(thumbX, thumbY, indexX, indexY) < 50) {
        particles[0].lock();
@@ -96,17 +182,19 @@ function draw() {
        particles[0].y = indexY * 0.7;
        particles[0].unlock();
     }
+    
   }
-
+  
   physics.update(); // Update physics engine
 
   // Drawing particles, eyes, and springs
-  if (showSprings) stroke(97, 160, 175);
-  strokeWeight(3); 
+  if (showSprings) stroke(255, 255, 255);         
+  strokeWeight(5); 
   line(particles[1].x, particles[1].y, eyes[2].x, eyes[2].y);
   line(particles[3].x, particles[3].y, eyes[3].x, eyes[3].y);
   strokeWeight(16);
   point(eyes[2].x, eyes[2].y);
+  
   point(eyes[3].x, eyes[3].y);
 
   fill(240, 108, 155);
@@ -127,6 +215,8 @@ function draw() {
       spring.show();
     }
   }
+  
+   
 }
 
 // Function to initialize webcam capture
