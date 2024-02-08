@@ -32,24 +32,29 @@ let bounds = new Rect(0, 0, width , height);
   physics = new VerletPhysics2D();
   physics.setWorldBounds(bounds);
 
-
+// top line
   particles.push(new Particle(200, 100));
   particles.push(new Particle(250, 100));
   particles.push(new Particle(300, 100));
   particles.push(new Particle(350, 100));
   particles.push(new Particle(400, 100));
-  particles.push(new Particle(350, 200));
+//
+  particles.push(new Particle(300, 200));
+  
   particles.push(new Particle(400, 300));
   particles.push(new Particle(350, 300));
   particles.push(new Particle(300, 300));
   particles.push(new Particle(250, 300));
   particles.push(new Particle(200, 300));
-  particles.push(new Particle(250, 200));
 
-  eyes.push(new Particle(275, 150));
+
+  particles.push(new Particle(300, 200));
+
+  eyes.push(new Particle(270, 150));
   eyes.push(new Particle(325, 150));
-  eyes.push(new Particle(250, 50));
-  eyes.push(new Particle(350, 50));
+  eyes.push(new Particle(200, 25));//antena
+  eyes.push(new Particle(400, 25));//antena
+ 
 
   for (let i = 0; i < particles.length; i++) {
     for (let j = i + 1; j < particles.length; j++) {
@@ -58,6 +63,8 @@ let bounds = new Rect(0, 0, width , height);
         let b = particles[j];
         // let b = particles[(i + 1) % particles.length];
         springs.push(new Spring(a, b, 0.001));
+    
+
       }
     }
   }
@@ -65,6 +72,7 @@ let bounds = new Rect(0, 0, width , height);
   for (let particle of particles) {
     springs.push(new Spring(particle, eyes[0], 0.01));
     springs.push(new Spring(particle, eyes[1], 0.01));
+   
   }
 
   springs.push(new Spring(eyes[2], particles[1], 0.01));
@@ -90,21 +98,24 @@ let bounds = new Rect(0, 0, width , height);
 function draw() {
  
 
-  physics.update();
+ physics.update();
 
   stroke(112, 50, 126);
   if (showSprings) stroke(112, 50, 126, 100);
 
   strokeWeight(4);
-  line(particles[1].x, particles[1].y, eyes[2].x, eyes[2].y);
+  // line(particles[1].x, particles[1].y, eyes[2].x, eyes[2].y);
   line(particles[3].x, particles[3].y, eyes[3].x, eyes[3].y);
   strokeWeight(16);
   point(eyes[2].x, eyes[2].y);
   point(eyes[3].x, eyes[3].y);
 
   fill(45, 197, 244);
+
   if (showSprings) fill(45, 197, 244, 100);
+
   strokeWeight(2);
+
   beginShape();
   for (let particle of particles) {
     vertex(particle.x, particle.y);
@@ -166,9 +177,9 @@ function draw() {
     let thumbY = map(mediaPipe.landmarks[0][4].y, 0, 1, 0, capture.scaledHeight);
     particles.forEach(particle => {
       let d = dist(particle.x, particle.y, indexX, indexY);
-      let repulsionThreshold = 100;  // Distance within which the repulsion effect occurs
+      let repulsionThreshold = 80;  // Distance within which the repulsion effect occurs
       if (d < repulsionThreshold) {
-        let repelForce = 100; // Strength of repulsion, adjust as needed
+        let repelForce = 50; // Strength of repulsion, adjust as needed
         let angle = atan2(particle.y - indexY, particle.x - indexX);
         particle.x += cos(angle) * repelForce;
         particle.y += sin(angle) * repelForce;
@@ -181,11 +192,14 @@ function draw() {
        particles[0].x = indexX;
        particles[0].y = indexY * 0.7;
        particles[0].unlock();
+
+
+  
     }
     
   }
   
-  physics.update(); // Update physics engine
+physics.update(); // Update physics engine
 
   // Drawing particles, eyes, and springs
   if (showSprings) stroke(255, 255, 255);         
