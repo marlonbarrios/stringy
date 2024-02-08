@@ -12,11 +12,11 @@ Stringy is a JavaScript sketch that creates an interactive simulation using webc
 ## About
 Stringy leverages the following technologies:
 
-- **p5.js**: A JavaScript library for creative coding and visualization. It provides a simple yet powerful framework for creating interactive graphics and media-rich experiences in the browser.
+- [**p5.js**](https://p5js.org/): A JavaScript library for creative coding and visualization. It provides a simple yet powerful framework for creating interactive graphics and media-rich experiences in the browser.
 
-- **Toxiclibs**: A collection of computational design tools for processing and Java. In Stringy, Toxiclibs is used for its Verlet physics engine, which allows for realistic particle simulations and spring-based interactions.
+- [**Toxiclibs**](http://haptic-data.com/toxiclibsjs/): A collection of computational design tools for processing and Java. In Stringy, Toxiclibs is used for its Verlet physics engine, which allows for realistic particle simulations and spring-based interactions.
 
-- **MediaPipe**: An open-source framework from Google Research that provides cross-platform tools for building multimodal applied ML pipelines. In Stringy, MediaPipe is utilized for hand tracking, enabling interaction with the particle simulation based on hand movements detected by the webcam.
+- [**MediaPipe**](https://developers.google.com/mediapipe/solutions/vision/gesture_recognizer#get_started): An open-source framework from Google Research that provides cross-platform tools for building multimodal applied ML pipelines. In Stringy, MediaPipe is utilized for hand tracking, enabling interaction with the particle simulation based on hand movements detected by the webcam.
 
 ## Functionality
 Stringy offers the following features:
@@ -40,3 +40,6 @@ The code consists of several functions:
 - `setCameraDimensions()`: Adjusts the dimensions of the camera feed to fit the canvas.
 - `centerOurStuff()`: Centers the webcam feed within the canvas.
 - `windowResized()`: Handles window resizing and adjusts camera dimensions accordingly.
+
+- ![Screenshot 2024-02-08 at 1 28 10 AM](https://github.com/marlonbarrios/stringy/assets/90220317/30b7eba8-033b-460a-8fca-dfd113a96f36)
+
