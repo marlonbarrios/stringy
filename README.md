@@ -43,6 +43,6 @@ The code consists of several functions:
 
 - ![Screenshot 2024-02-08 at 1 28 10 AM](https://github.com/marlonbarrios/stringy/assets/90220317/30b7eba8-033b-460a-8fca-dfd113a96f36)
 
-- Inspored and hacked from the amazing [Coding Train](https://thecodingtrain.com/challenges/177-soft-body-character)
-- 
+
+  Created during a artistic reserach residency at [Lake Studios Berlin](https://lakestudiosberlin.com/) in February 2024
 
