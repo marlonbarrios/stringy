@@ -42,7 +42,7 @@ The code consists of several functions:
 - `centerOurStuff()`: Centers the webcam feed within the canvas.
 - `windowResized()`: Handles window resizing and adjusts camera dimensions accordingly.
 
-- ![Screenshot 2024-02-08 at 1 28 10 AM](https://github.com/marlonbarrios/stringy/assets/90220317/30b7eba8-033b-460a-8fca-dfd113a96f36)
+
 
 - Inspored and hacked from the amazing [Coding Train](https://thecodingtrain.com/challenges/177-soft-body-character)
 
@@ -68,5 +68,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+- ![Screenshot 2024-02-08 at 1 28 10 AM](https://github.com/marlonbarrios/stringy/assets/90220317/30b7eba8-033b-460a-8fca-dfd113a96f36)
 
 
