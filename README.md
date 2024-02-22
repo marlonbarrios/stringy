@@ -8,7 +8,7 @@ Stringy is a JavaScript sketch that creates an interactive simulation using webc
 - **Marlon Barrios Solano:** For more about Marlon, his projects, and how you can support his work, visit his [Linktree](https://linktr.ee/marlonbarriososolano).
 
 ## Live Demo
-[Launch Extraordinary Alien](https://marlonbarrios.github.io/stringy/)
+[Launch Extraordinary Alien](https://marlonbarrios.github.io/extraordinary-alien/)
 
 ## About
 It leverages the following technologies:
@@ -44,7 +44,7 @@ The code consists of several functions:
 
 
 
-- Inspored and hacked from the amazing [Coding Train](https://thecodingtrain.com/challenges/177-soft-body-character)
+- Inspired and hacked from the amazing [Coding Train](https://thecodingtrain.com/challenges/177-soft-body-character)
 
 - 
 ## MIT License
