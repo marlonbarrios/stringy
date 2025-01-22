@@ -10,6 +10,8 @@ Stringy is a JavaScript sketch that creates an interactive simulation using webc
 ## Live Demo
 [Launch Extraordinary Alien](https://marlonbarrios.github.io/extraordinary-alien/)
 
+[version 2.0](https://github.com/marlonbarrios/extraordinary_alien2)
+
 ## About
 It leverages the following technologies:
 
